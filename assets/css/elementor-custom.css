@@ -1,0 +1,4 @@
+/* Space rhythm for Elementor sections */
+.elementor-section{ padding-block: clamp(48px, 7vw, 96px); }
+.elementor h1,.elementor h2,.elementor h3{ letter-spacing:.02em }
+.elementor .products .product .price{ font-weight:600 }

@@ -1,0 +1,103 @@
+{
+  "theme_name": "-BLANK- Fashion",
+  "version": "1.0.0",
+  "settings": {
+    "colors": {
+      "primary": "#000000",
+      "accent": "#ffffff",
+      "text": "#ffffff",
+      "background": "#000000",
+      "overlay": "rgba(255, 255, 255, 0.1)",
+      "glass": "rgba(255, 255, 255, 0.05)",
+      "border": "rgba(255, 255, 255, 0.1)"
+    },
+    "typography": {
+      "primary_font": "Inter",
+      "headings_font": "Inter",
+      "font_weights": {
+        "light": 300,
+        "regular": 400,
+        "medium": 500,
+        "semibold": 600,
+        "bold": 700,
+        "black": 900
+      }
+    },
+    "layout": {
+      "container_width": "1200px",
+      "content_spacing": "80px",
+      "section_spacing": "5rem"
+    },
+    "animations": {
+      "float_animation": "floating 3s ease-in-out infinite",
+      "glass_hover": "transform 0.3s ease",
+      "fade_in": "fadeInUp 0.8s ease-out forwards"
+    },
+    "glass_morphism": {
+      "backdrop_filter": "blur(10px)",
+      "background": "rgba(255, 255, 255, 0.05)",
+      "border": "1px solid rgba(255, 255, 255, 0.1)",
+      "border_radius": "1rem"
+    },
+    "buttons": {
+      "primary": {
+        "background": "rgba(255, 255, 255, 0.1)",
+        "color": "#ffffff",
+        "border": "1px solid rgba(255, 255, 255, 0.2)",
+        "hover_background": "rgba(255, 255, 255, 0.2)"
+      },
+      "secondary": {
+        "background": "transparent",
+        "color": "#ffffff",
+        "border": "1px solid rgba(255, 255, 255, 0.3)",
+        "hover_background": "rgba(255, 255, 255, 0.1)"
+      }
+    },
+    "header": {
+      "transparent": true,
+      "sticky": true,
+      "background": "rgba(0, 0, 0, 0.8)",
+      "backdrop_filter": "blur(10px)"
+    },
+    "footer": {
+      "background": "rgba(0, 0, 0, 0.95)",
+      "border_top": "1px solid rgba(255, 255, 255, 0.1)"
+    }
+  },
+  "custom_css": {
+    "global": {
+      "body": {
+        "background": "linear-gradient(135deg, #000000 0%, #1a1a1a 100%)",
+        "color": "#ffffff",
+        "font_family": "'Inter', sans-serif"
+      }
+    },
+    "components": {
+      "glass_card": {
+        "background": "rgba(255, 255, 255, 0.05)",
+        "backdrop_filter": "blur(10px)",
+        "border": "1px solid rgba(255, 255, 255, 0.1)",
+        "border_radius": "1rem",
+        "transition": "transform 0.3s ease"
+      },
+      "floating_shapes": {
+        "animation": "floating 3s ease-in-out infinite",
+        "opacity": "0.1"
+      }
+    }
+  },
+  "elementor_global_colors": {
+    "primary": "#000000",
+    "secondary": "#ffffff", 
+    "text": "#ffffff",
+    "accent": "rgba(255, 255, 255, 0.8)",
+    "glass": "rgba(255, 255, 255, 0.05)",
+    "overlay": "rgba(255, 255, 255, 0.1)"
+  },
+  "elementor_global_fonts": {
+    "primary": "Inter",
+    "secondary": "Inter",
+    "text": "Inter",
+    "accent": "Inter"
+  }
+}

@@ -1,0 +1,6 @@
+- WPDeployer*
+- .git*
+- .DS_Store
+- node_modules/
+- vendor/
+- *.map

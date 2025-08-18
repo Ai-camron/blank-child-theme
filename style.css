@@ -1,0 +1,78 @@
+/*
+ Theme Name:  -BLANK- Child
+ Template:    astra
+ Description: Child theme for -BLANK- (WooCommerce + Elementor)
+ Version:     1.0.0
+*/
+
+/* ===== GLOBAL RESET & BASICS ===== */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  color: #fff;
+  background: #000;
+  line-height: 1.6;
+}
+
+/* ===== HERO SECTION ===== */
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  min-height: 80vh;
+  background: radial-gradient(circle at center, rgba(108,99,255,0.3), transparent 70%),
+              radial-gradient(circle at bottom right, rgba(230,57,70,0.25), transparent 70%),
+              #000;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #6c63ff;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  max-width: 600px;
+}
+
+/* ===== FEATURES SECTION ===== */
+.features {
+  padding: 60px 20px;
+  background: #111;
+  text-align: center;
+}
+
+.features h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #6c63ff;
+}
+
+.features .cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.features .cards li {
+  background: #1e1e1e;
+  padding: 20px 30px;
+  border-radius: 10px;
+  color: #fff;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.features .cards li:hover {
+  transform: translateY(-5px);
+  background: #6c63ff;
+}

@@ -1,0 +1,69 @@
+/* =============================================================
+   -BLANK- Child Theme – custom.css
+   Purpose: structure, layout, Woo grid. (No animations here.)
+   Animations/dots/buttons live in: /assets/css/brand-animations.css
+   ============================================================= */
+
+/* Reveal global background applied to <body>.has-blank-bg */
+html, body { background: transparent; }
+
+/* Astra / Elementor wrappers often paint solid backgrounds – clear them */
+.site,
+.ast-container,
+.site-content,
+.content-area,
+.entry-content,
+.ast-plain-container .site-content,
+.ast-page-builder-template .site-content,
+.elementor-location-body,
+.elementor-section-wrap,
+.elementor-section,
+.elementor-container {
+  background: transparent !important;
+}
+
+/* Keep stacking clean: content above glows */
+body.has-blank-bg { z-index: 0; }
+.site, .ast-container, .site-content { position: relative; z-index: 1; }
+
+/* Optional safety against clipping body pseudo-elements */
+html, body { overflow: visible; overflow-x: clip; }
+
+/* =============================================================
+   WooCommerce Product Grid
+   ============================================================= */
+.woocommerce ul.products,
+.woocommerce-page ul.products{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap: clamp(14px, 2vw, 24px);
+}
+
+/* Card basics */
+.woocommerce ul.products li.product{
+  display:flex; flex-direction:column;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 1200px){
+  .woocommerce ul.products{ grid-template-columns:repeat(3,1fr); }
+}
+@media (max-width: 900px){
+  .woocommerce ul.products{ grid-template-columns:repeat(2,1fr); }
+}
+@media (max-width: 540px){
+  .woocommerce ul.products{ grid-template-columns:1fr; }
+}
+
+/* Product grid consistency */
+.woocommerce ul.products { align-content: start; }
+.woocommerce ul.products li.product { min-width: 0; }
+
+/* =============================================================
+   Layout wrapper
+   ============================================================= */
+#primary.site-main {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding: clamp(16px, 3vw, 32px);
+}

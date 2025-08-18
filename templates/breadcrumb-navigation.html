@@ -1,0 +1,128 @@
+<!-- Breadcrumb Navigation Component -->
+<nav class="breadcrumb-nav" aria-label="Breadcrumb">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="index.html">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9,22 9,12 15,12 15,22"/>
+                    </svg>
+                    Home
+                </a>
+            </li>
+            <!-- Dynamic breadcrumb items will be inserted here -->
+        </ol>
+    </div>
+</nav>
+
+<!-- Breadcrumb Styles -->
+<style>
+.breadcrumb-nav {
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.breadcrumb-item {
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumb-item:not(:last-child)::after {
+    content: '›';
+    margin: 0 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.1rem;
+}
+
+.breadcrumb-item a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.breadcrumb-item a:hover {
+    color: #ffffff;
+}
+
+.breadcrumb-item:last-child a {
+    color: #ffffff;
+    pointer-events: none;
+}
+
+.breadcrumb-item svg {
+    width: 16px;
+    height: 16px;
+}
+
+@media (max-width: 768px) {
+    .breadcrumb {
+        font-size: 0.8rem;
+    }
+    
+    .breadcrumb-item:not(:last-child)::after {
+        margin: 0 0.5rem;
+    }
+}
+</style>
+
+<!-- JavaScript for Dynamic Breadcrumbs -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const breadcrumb = document.querySelector('.breadcrumb');
+    const currentPage = window.location.pathname.split('/').pop().replace('.html', '');
+    
+    const pageNames = {
+        'index': 'Home',
+        'shop': 'Shop',
+        'lookbook': 'Lookbook',
+        'about': 'About',
+        'contact': 'Contact',
+        'features': 'Features',
+        'sitemap': 'Site Map'
+    };
+    
+    if (currentPage && currentPage !== 'index' && pageNames[currentPage]) {
+        const breadcrumbItem = document.createElement('li');
+        breadcrumbItem.className = 'breadcrumb-item';
+        breadcrumbItem.innerHTML = `<a href="${currentPage}.html">${pageNames[currentPage]}</a>`;
+        breadcrumb.appendChild(breadcrumbItem);
+    }
+    
+    // Add section breadcrumbs based on hash
+    const hash = window.location.hash.substring(1);
+    if (hash) {
+        const sectionNames = {
+            'categories': 'Categories',
+            'featured': 'Featured Products',
+            'seasonal': 'Seasonal Collections',
+            'tips': 'Style Tips',
+            'story': 'Brand Story',
+            'team': 'Our Team',
+            'form': 'Contact Form',
+            'faq': 'FAQ'
+        };
+        
+        if (sectionNames[hash]) {
+            const sectionItem = document.createElement('li');
+            sectionItem.className = 'breadcrumb-item';
+            sectionItem.innerHTML = `<a href="#${hash}">${sectionNames[hash]}</a>`;
+            breadcrumb.appendChild(sectionItem);
+        }
+    }
+});
+</script>

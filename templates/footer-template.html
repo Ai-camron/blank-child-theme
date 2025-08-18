@@ -1,0 +1,16 @@
+<!-- Footer Template for Astra/Elementor -->
+<!-- File: footer-template.html -->
+<footer class="footer">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="footer-copyright">© <span id="year"></span> -BLANK-. All rights reserved.</div>
+        <div class="footer-links">
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Accessibility</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>

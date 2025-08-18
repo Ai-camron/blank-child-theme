@@ -1,0 +1,163 @@
+/* ============================
+   -BLANK- Animated Backgrounds
+   Centralize all animation styles here.
+   Safe for Elementor (free) or Gutenberg.
+=============================*/
+
+/* ---- Brand tokens (adjust as needed) ---- */
+:root{
+  --blank-bg: #0b0b11;         /* site base */
+  --blank-ink: #ffffff;         /* text on dark */
+  --blank-accent: #7b5cff;      /* neon violet */
+  --blank-accent-2: #2ee6d6;    /* neon teal */
+  --blank-accent-rgb: 123 92 255;     /* for rgba fallback */
+  --blank-accent-2-rgb: 46 230 214;   /* for rgba fallback */
+  --blank-dot-alpha: 0.06;      /* dot intensity */
+  --blank-glow-alpha: 0.42;     /* glow intensity as 0-1 */
+  --blank-glow-alpha-pct: 42%;  /* same value in % for color-mix */
+}
+
+/* ---- Global reduced motion guard ---- */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+}
+
+/* =========================================
+   1) Dots + ambient glow (page/section skin)
+   Usage: add class "has-blank-bg" to body, a Section, or a Container.
+   Works on: body, .elementor-section, .wp-block-group, etc.
+========================================== */
+body.has-blank-bg,
+.has-blank-bg{
+  position: relative;
+  isolation: isolate; /* keep glow behind content */
+  color: var(--blank-ink);
+  background:
+    radial-gradient(circle at 1px 1px, rgba(255,255,255,var(--blank-dot-alpha)) 1px, transparent 1px) 0 0/20px 20px,
+    var(--blank-bg);
+}
+
+/* Layered glowing orbs via ::before/::after so markup stays clean */
+body.has-blank-bg::before,
+body.has-blank-bg::after,
+.has-blank-bg::before,
+.has-blank-bg::after{
+  content:"";
+  position:absolute; inset:auto;
+  z-index:-1;
+  filter: blur(60px);
+  pointer-events:none;
+  will-change: transform, opacity;
+}
+
+/* Top-right violet glow */
+body.has-blank-bg::before,
+.has-blank-bg::before{
+  width: 60vmin; height: 60vmin;
+  right: -10vmin; top: -10vmin;
+  /* Fallback using rgba */
+  background: radial-gradient(closest-side, rgba(var(--blank-accent-rgb) / var(--blank-glow-alpha)), transparent 70%);
+  animation: blank-float-1 7s ease-in-out infinite alternate;
+}
+
+/* Bottom-left teal glow */
+body.has-blank-bg::after,
+.has-blank-bg::after{
+  width: 45vmin; height: 45vmin;
+  left: -8vmin; bottom: -8vmin;
+  /* Fallback using rgba */
+  background: radial-gradient(closest-side, rgba(var(--blank-accent-2-rgb) / var(--blank-glow-alpha)), transparent 70%);
+  animation: blank-float-2 9s ease-in-out infinite alternate;
+}
+
+/* Prefer color-mix if supported (nicer blend control) */
+@supports (background: color-mix(in srgb, red 50%, transparent)) {
+  body.has-blank-bg::before,
+  .has-blank-bg::before{
+    background: radial-gradient(closest-side,
+      color-mix(in srgb, var(--blank-accent) var(--blank-glow-alpha-pct), transparent),
+      transparent 70%);
+  }
+  body.has-blank-bg::after,
+  .has-blank-bg::after{
+    background: radial-gradient(closest-side,
+      color-mix(in srgb, var(--blank-accent-2) var(--blank-glow-alpha-pct), transparent),
+      transparent 70%);
+  }
+}
+
+/* Float keyframes (GPU-friendly translate) */
+@keyframes blank-float-1 {
+  from { transform: translate3d(0,0,0);   opacity:.80; }
+  to   { transform: translate3d(0,10px,0); opacity:.95; }
+}
+@keyframes blank-float-2 {
+  from { transform: translate3d(0,0,0);   opacity:.75; }
+  to   { transform: translate3d(0,-12px,0); opacity:.92; }
+}
+
+/* =========================================
+   2) Utility: Local glow wrapper for any block
+   Wrap a card/section with class "blank-glow-wrap"
+   (keeps glow inside the block only)
+========================================== */
+.blank-glow-wrap{
+  position: relative; isolation:isolate;
+}
+.blank-glow-wrap::before{
+  content:""; position:absolute; inset:-10% -8%;
+  z-index:-1; filter: blur(40px); opacity:.85;
+  /* Fallback using rgba */
+  background:
+    radial-gradient(closest-side, rgba(var(--blank-accent-rgb) / 0.36), transparent 70%),
+    radial-gradient(closest-side, rgba(var(--blank-accent-2-rgb) / 0.28), transparent 70%);
+  background-repeat:no-repeat;
+  background-position: 70% 20%, 20% 80%;
+  animation: blank-pulse 6.5s ease-in-out infinite alternate;
+}
+@supports (background: color-mix(in srgb, red 50%, transparent)) {
+  .blank-glow-wrap::before{
+    background:
+      radial-gradient(closest-side, color-mix(in srgb, var(--blank-accent) 36%, transparent), transparent 70%),
+      radial-gradient(closest-side, color-mix(in srgb, var(--blank-accent-2) 28%, transparent), transparent 70%);
+  }
+}
+@keyframes blank-pulse{
+  from{ transform: scale(1);   opacity:.7; }
+  to  { transform: scale(1.04); opacity:.9; }
+}
+
+/* =========================================
+   3) Buttons (brand)
+   Add .btn and optional .btn-secondary
+========================================== */
+.btn{
+  --btn-bg: var(--blank-accent);
+  --btn-ink:#0a0718;
+  display:inline-flex; align-items:center; justify-content:center;
+  gap:.6em; font-weight:700; letter-spacing:.02em;
+  text-decoration:none; line-height:1;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--btn-bg) 92%, #fff 8%), var(--btn-bg));
+  color: var(--btn-ink);
+  padding: .9rem 1.2rem; border-radius: .75rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,.25), 0 0 20px color-mix(in srgb, var(--blank-accent) 30%, transparent);
+  transition: transform .2s ease, box-shadow .25s ease, filter .25s ease;
+}
+.btn:hover{ transform: translateY(-1px); filter: brightness(1.05); }
+.btn:active{ transform: translateY(0); box-shadow: 0 6px 16px rgba(0,0,0,.25); }
+
+.btn-secondary{ --btn-bg: var(--blank-accent-2); }
+
+/* Optional: full-width on mobile in Elementor/Gutenberg */
+@media (max-width:600px){ .btn{ width:100%; justify-content:center; } }
+
+/* =========================================
+   4) Helpers for Elementor/Gutenberg blocks
+========================================== */
+.elementor-section.has-blank-bg,
+.wp-block-group.has-blank-bg{
+  border-radius: clamp(12px, 2vw, 22px);
+  overflow: hidden; /* keep glows clipped to the section if desired */
+  padding: clamp(24px, 5vw, 72px);
+}
+ß

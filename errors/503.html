@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Service Unavailable</title>
+  <link rel="stylesheet" href="https://yellow-antelope-355850.hostingersite.com/wp-content/themes/astra/style.css">
+  <style>
+    body {
+      margin: 0; padding: 0; font-family: inherit; color: #fff; text-align: center;
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+      background: #000; background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 20px 20px; position: relative; overflow: hidden;
+    }
+    body::before {
+      content: ""; position: absolute; width: 600px; height: 600px;
+      background: radial-gradient(circle at center, rgba(108,99,255,0.6), transparent 70%);
+      filter: blur(120px); top: -200px; left: -200px; z-index: 0;
+    }
+    body::after {
+      content: ""; position: absolute; width: 400px; height: 400px;
+      background: radial-gradient(circle at center, rgba(57,173,230,0.6), transparent 70%);
+      filter: blur(100px); bottom: -150px; right: -150px; z-index: 0;
+    }
+    .error-code { font-size: 120px; font-weight: bold; color: #39b1e6; margin-bottom: 20px; position: relative; z-index: 1; }
+    h1, p, a { position: relative; z-index: 1; }
+    .btn { display: inline-block; padding: 12px 24px; margin: 10px; background: #6c63ff; color: #fff; text-decoration: none; border-radius: 6px; }
+    .btn.secondary { background: #555; }
+  </style>
+</head>
+<body>
+  <div class="error-code">503</div>
+  <h1>Service Unavailable</h1>
+  <p>We’re doing some maintenance right now. Please check back soon.</p>
+  <a class="btn" href="/">Go Home</a>
+</body>
+</html>
