@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>-BLANK- | Anything But Blank</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <header class="hero" id="wireframe-hero">
+      <div class="hero__inner">
+        <p class="hero__eyebrow">New Drop</p>
+        <h1 class="hero__title">-BLANK-</h1>
+        <p class="hero__description">
+          Anything But Blank — motion-led minimalism with bold identity.
+        </p>
+        <div class="hero__cta">
+          <a href="/shop" class="btn">Shop Now</a>
+          <a href="#wireframe-featured" class="btn btn-secondary">Skip to featured</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="featured-collections" id="wireframe-featured" aria-labelledby="wireframe-featured-title">
+        <div class="product-grid__header">
+          <h2 id="wireframe-featured-title" class="section-title">Featured Collections</h2>
+          <p class="section-description">Three signature lines shaped by motion graphics.</p>
+        </div>
+        <div class="collection-grid" role="list">
+          <article class="collection-card" role="listitem">
+            <h3>Signal Interfere</h3>
+            <p>Waveform gradients in kinetic motion.</p>
+          </article>
+          <article class="collection-card" role="listitem">
+            <h3>Divide + Repeat</h3>
+            <p>Split-panel silhouettes with mirrored accents.</p>
+          </article>
+          <article class="collection-card" role="listitem">
+            <h3>Color Noise</h3>
+            <p>Spectral color blocking with soft diffused glow.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="brand-philosophy" aria-labelledby="wireframe-philosophy-title">
+        <h2 id="wireframe-philosophy-title">Brand Philosophy</h2>
+        <p>
+          -BLANK- moves minimalist fashion into intentional, quiet disruption. Every garment is a composed
+          message of visual restraint and confident identity.
+        </p>
+      </section>
+
+      <section class="newsletter-signup" aria-labelledby="wireframe-newsletter-title">
+        <div class="newsletter-content">
+          <h2 id="wireframe-newsletter-title">Stay in the Loop</h2>
+          <p>Get early access to new drops, exclusive content, and design insights.</p>
+          <form class="newsletter-form" action="#" method="post">
+            <label for="wireframe-email" class="screen-reader-text">Email address</label>
+            <input id="wireframe-email" type="email" name="email" placeholder="Enter your email" required />
+            <button type="submit" class="btn">Subscribe</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© <span id="wireframe-year"></span> Papi &amp; Pup LLC. “-BLANK-” is a trademark of Papi &amp; Pup LLC.</p>
+    </footer>
+
+    <script>
+      document.getElementById('wireframe-year').textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

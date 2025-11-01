@@ -33,31 +33,38 @@ html, body { overflow: visible; overflow-x: clip; }
    WooCommerce Product Grid
    ============================================================= */
 .woocommerce ul.products,
-.woocommerce-page ul.products{
+.woocommerce-page ul.products,
+.product-grid__items ul.products{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
   gap: clamp(14px, 2vw, 24px);
 }
 
 /* Card basics */
-.woocommerce ul.products li.product{
+.woocommerce ul.products li.product,
+.product-grid__items ul.products li.product{
   display:flex; flex-direction:column;
 }
 
 /* Responsive breakpoints */
 @media (max-width: 1200px){
-  .woocommerce ul.products{ grid-template-columns:repeat(3,1fr); }
+  .woocommerce ul.products,
+  .product-grid__items ul.products{ grid-template-columns:repeat(3,1fr); }
 }
 @media (max-width: 900px){
-  .woocommerce ul.products{ grid-template-columns:repeat(2,1fr); }
+  .woocommerce ul.products,
+  .product-grid__items ul.products{ grid-template-columns:repeat(2,1fr); }
 }
 @media (max-width: 540px){
-  .woocommerce ul.products{ grid-template-columns:1fr; }
+  .woocommerce ul.products,
+  .product-grid__items ul.products{ grid-template-columns:1fr; }
 }
 
 /* Product grid consistency */
-.woocommerce ul.products { align-content: start; }
-.woocommerce ul.products li.product { min-width: 0; }
+.woocommerce ul.products,
+.product-grid__items ul.products { align-content: start; }
+.woocommerce ul.products li.product,
+.product-grid__items ul.products li.product { min-width: 0; }
 
 /* =============================================================
    Layout wrapper

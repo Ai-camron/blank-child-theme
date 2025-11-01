@@ -14,13 +14,16 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Uses theme version normally; falls back to filemtime in WP_DEBUG for easier dev.
  */
 function blank_asset_version( $relative_path ) {
-  $theme    = wp_get_theme();
-  $version  = $theme ? $theme->get( 'Version' ) : '1.0.0';
-  $fullpath = get_stylesheet_directory() . $relative_path;
+  $theme   = wp_get_theme();
+  $version = $theme ? $theme->get( 'Version' ) : '1.0.0';
 
-  if ( defined( 'WP_DEBUG' ) && WP_DEBUG && file_exists( $fullpath ) ) {
-    return (string) filemtime( $fullpath );
+  $relative_path = '/' . ltrim( $relative_path, '/' );
+  $full_path     = get_stylesheet_directory() . $relative_path;
+
+  if ( defined( 'WP_DEBUG' ) && WP_DEBUG && file_exists( $full_path ) ) {
+    return (string) filemtime( $full_path );
   }
+
   return $version ?: '1.0.0';
 }
 
@@ -36,11 +39,18 @@ function blank_enqueue_assets() {
     wp_get_theme( get_template() )->get( 'Version' )
   );
 
+  wp_enqueue_style(
+    'blank-theme-base',
+    get_stylesheet_uri(),
+    ['blank-parent-style'],
+    blank_asset_version( 'style.css' )
+  );
+
   // Child CSS: base, Elementor helpers, animations
   wp_enqueue_style(
     'blank-custom',
     get_stylesheet_directory_uri() . '/assets/css/custom.css',
-    ['blank-parent-style'],
+    ['blank-theme-base'],
     blank_asset_version( '/assets/css/custom.css' )
   );
 
@@ -60,14 +70,31 @@ function blank_enqueue_assets() {
 
   // Theme JS
   wp_enqueue_script(
-    'blank-theme',
-    get_stylesheet_directory_uri() . '/assets/js/theme.js',
-    ['jquery'],
-    blank_asset_version( '/assets/js/theme.js' ),
+    'blank-theme-scripts',
+    get_stylesheet_directory_uri() . '/assets/js/site.js',
+    [],
+    blank_asset_version( '/assets/js/site.js' ),
     true
   );
 }
 add_action( 'wp_enqueue_scripts', 'blank_enqueue_assets', 20 );
+
+/**
+ * Theme supports and accessibility improvements.
+ */
+function blank_theme_setup() {
+  add_theme_support( 'title-tag' );
+  add_theme_support( 'post-thumbnails' );
+  add_theme_support( 'woocommerce' );
+
+  register_nav_menus(
+    [
+      'primary' => __( 'Primary Navigation', 'blank' ),
+      'footer'  => __( 'Footer Navigation', 'blank' ),
+    ]
+  );
+}
+add_action( 'after_setup_theme', 'blank_theme_setup' );
 
 /**
  * Balanced product grid (shop columns on archives).
