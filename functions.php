@@ -28,6 +28,14 @@ function blank_asset_version( $relative_path ) {
  * Enqueue parent + child styles and theme JS.
  */
 function blank_enqueue_assets() {
+  // Typography
+  wp_enqueue_style(
+    'blank-google-fonts',
+    'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Quicksand:wght@400;500;700&display=swap',
+    [],
+    null
+  );
+
   // Parent Astra CSS (load first)
   wp_enqueue_style(
     'blank-parent-style',
@@ -96,5 +104,27 @@ add_filter( 'body_class', function( $classes ) {
   }
   return $classes;
 });
+
+
+/**
+ * Helper: WooCommerce cart item count.
+ */
+function blank_wc_cart_count() {
+  if ( function_exists( 'WC' ) && null !== WC()->cart ) {
+    return (int) WC()->cart->get_cart_contents_count();
+  }
+  return 0;
+}
+
+if ( function_exists( 'WC' ) ) {
+  add_filter( 'woocommerce_add_to_cart_fragments', function( $fragments ) {
+    ob_start();
+    ?>
+    <span class="cart-count" aria-live="polite"><?php echo esc_html( blank_wc_cart_count() ); ?></span>
+    <?php
+    $fragments['span.cart-count'] = ob_get_clean();
+    return $fragments;
+  } );
+}
 
 // End of functions.php
