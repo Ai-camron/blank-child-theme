@@ -1,15 +1,31 @@
-
 <?php
-if ( ! defined( 'ABSPATH' ) ) exit;
+/**
+ * WooCommerce archive overrides for -BLANK- child theme.
+ *
+ * @package BlankChild
+ */
+
+defined( 'ABSPATH' ) || exit;
+
 get_header( 'shop' );
+?>
 
-echo '<main id="primary" class="site-main shop-main">';
-	if ( woocommerce_product_loop() ) {
-		woocommerce_output_loop();
-	} else {
-		wc_get_template( 'loop/no-products-found.php' );
-	}
-echo '</main>';
+<main id="primary" class="site-main shop-main" role="main">
+  <?php if ( woocommerce_product_loop() ) : ?>
+    <?php woocommerce_output_all_notices(); ?>
+    <?php woocommerce_product_loop_start(); ?>
 
-get_footer( 'shop' );
+    <?php while ( have_posts() ) : ?>
+      <?php the_post(); ?>
+      <?php wc_get_template_part( 'content', 'product' ); ?>
+    <?php endwhile; ?>
 
+    <?php woocommerce_product_loop_end(); ?>
+
+    <?php do_action( 'woocommerce_after_shop_loop' ); ?>
+  <?php else : ?>
+    <?php do_action( 'woocommerce_no_products_found' ); ?>
+  <?php endif; ?>
+</main>
+
+<?php get_footer( 'shop' ); ?>
