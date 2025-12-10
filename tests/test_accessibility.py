@@ -35,6 +35,30 @@ class FrontPageAccessibilityTests(unittest.TestCase):
         skip_links = [link for link in links if link.getAttribute("href") == "#featured-products"]
         self.assertGreaterEqual(len(skip_links), 1, "Expected a skip link pointing to featured products")
 
+    def test_collections_have_images_with_alt_text(self):
+        cards = self.document.getElementsByTagName("article")
+        spotlight_cards = [card for card in cards if card.getAttribute("class") == "collection-card"]
+        self.assertGreater(len(spotlight_cards), 0)
+        for card in spotlight_cards:
+            images = card.getElementsByTagName("img")
+            self.assertGreater(len(images), 0)
+            for image in images:
+                alt_text = image.getAttribute("alt")
+                self.assertTrue(alt_text, "Collection imagery should include descriptive alt text")
+
+    def test_newsletter_form_is_labeled(self):
+        forms = self.document.getElementsByTagName("form")
+        newsletter_forms = [form for form in forms if form.getAttribute("class") == "newsletter__form"]
+        self.assertEqual(len(newsletter_forms), 1, "Newsletter form should exist")
+        form = newsletter_forms[0]
+        labels = form.getElementsByTagName("label")
+        self.assertGreater(len(labels), 0)
+        input_elements = form.getElementsByTagName("input")
+        self.assertGreater(len(input_elements), 0)
+        input_id = input_elements[0].getAttribute("id")
+        referenced_label = [label for label in labels if label.getAttribute("for") == input_id]
+        self.assertGreater(len(referenced_label), 0, "Email field should be associated with a label")
+
     def _get_section(self, section_id):
         sections = self.document.getElementsByTagName("section")
         for section in sections:
